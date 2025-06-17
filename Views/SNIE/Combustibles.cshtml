@@ -1,0 +1,122 @@
+@model dynamic
+@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Lista de Combustibles";
+    var httpContext = HttpContextAccessor.HttpContext;
+    var perfilUsuarioJson = httpContext.Session.GetString("PerfilUsuario");
+    var perfilUsuario = JsonConvert.DeserializeObject<PerfilUsuario>(perfilUsuarioJson);
+
+    var header = new HeaderViewModel
+    {
+        Title = "Lista de Combustibles con Poder Calorífico",
+        IconPath = "combustible.png",
+        Description = "Consulta técnica de combustibles con sus valores energéticos equivalentes.",
+        Section = "⛽ Energía Fósil y Alternativa",
+        ModuleInfo = JsonConvert.SerializeObject(new
+        {
+            title = "Poder Calorífico de Combustibles",
+            description = "Tabla técnica de referencia para evaluaciones energéticas.",
+            functionality = "Facilita la transformación a unidades equivalentes y comparativos.",
+            stage = "Consulta Energética",
+            roles = new[] {
+new { icon = "fire", text = "Combustibles fósiles" },
+new { icon = "leaf", text = "Biocombustibles" },
+new { icon = "atom", text = "Opciones emergentes (Hidógeno)" }
+},
+            order = new { step = 1, description = "Selección de referencia calórica" }
+        })
+    };
+}
+
+@await Html.PartialAsync("_ViewHeader", header)
+
+<!-- Tabla con DataTable -->
+<div class="container-fluid px-5 mb-4" data-aos="fade-up">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-table text-secondary"></i> Tabla de Poder Calorífico</h5>
+            <div class="table-responsive">
+                <table id="tablaCombustibles" class="table table-striped table-hover w-100">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Combustible</th>
+                            <th>Poder Calorífico (MJ/kg)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Gasolina</td>
+                            <td>44.0</td>
+                        </tr>
+                        <tr>
+                            <td>Diésel</td>
+                            <td>45.5</td>
+                        </tr>
+                        <tr>
+                            <td>Gas Natural</td>
+                            <td>38.0</td>
+                        </tr>
+                        <tr>
+                            <td>Carbón</td>
+                            <td>24.0</td>
+                        </tr>
+                        <tr>
+                            <td>Biomasa</td>
+                            <td>15.0</td>
+                        </tr>
+                        <tr>
+                            <td>Hidrogeno</td>
+                            <td>120.0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gráfico Highcharts -->
+<div class="container-fluid px-5 mb-5" data-aos="zoom-in">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-chart-bar text-primary"></i> Comparativo Visual</h5>
+            <div id="graficoCombustibles" style="height: 400px;"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablaCombustibles').DataTable({
+                paging: false,
+                searching: false,
+                info: false
+            });
+
+            Highcharts.chart('graficoCombustibles', {
+                chart: { type: 'bar' },
+                title: { text: 'Poder Calorífico de Combustibles' },
+                xAxis: {
+                    categories: ['Gasolina', 'Diésel', 'Gas Natural', 'Carbón', 'Biomasa', 'Hidrogeno'],
+                    title: { text: null }
+                },
+                yAxis: {
+                    min: 0,
+                    title: { text: 'MJ/kg' }
+                },
+                series: [{
+                    name: 'Poder Calorífico',
+                    data: [44.0, 45.5, 38.0, 24.0, 15.0, 120.0],
+                    colorByPoint: true
+                }]
+            });
+        });
+    </script>
+}
