@@ -24,16 +24,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="~/css/mexigeo-theme.css">
 
     <style>
-        :root {
-            --primary-color: #216d92;
-            --primary-light: #81c3c9;
-            --primary-dark: #0d4b6e;
-            --secondary-color: #FF9800;
-            --dark-color: #1A3E4C;
-            --light-color: #F8F9FA;
-        }
+
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -66,16 +60,16 @@
         }
 
         .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
+            background-color: var(--mexigeo-primary);
+            border-color: var(--mexigeo-primary);
             font-weight: 600;
             padding: 0.75rem 1.5rem;
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: var(--primary-dark);
-            border-color: var(--primary-dark);
+            background-color: var(--mexigeo-primary-dark);
+            border-color: var(--mexigeo-primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(33, 109, 146, 0.3);
         }
@@ -85,7 +79,7 @@
             font-weight: 600;
             font-size: 1.3rem;
             margin-bottom: 1.5rem;
-            color: var(--primary-color);
+            color: var(--mexigeo-primary);
             position: relative;
             padding-bottom: 0.5rem;
         }
@@ -97,7 +91,7 @@
             left: 0;
             width: 50px;
             height: 3px;
-            background: var(--primary-light);
+            background: var(--mexigeo-primary);
         }
 
         .barra-carga {
@@ -111,7 +105,7 @@
         .barra-carga .progreso {
             height: 100%;
             width: 0%;
-            background-color: var(--primary-light);
+            background-color: var(--mexigeo-primary);
             transition: width 0.6s ease-in-out;
         }
 
@@ -128,12 +122,12 @@
 
         .form-control:focus,
         .form-select:focus {
-            border-color: var(--primary-light);
+            border-color: var(--mexigeo-primary);
             box-shadow: 0 0 0 0.25rem rgba(129, 195, 201, 0.25);
         }
 
         .input-group-text {
-            background-color: var(--primary-color);
+            background-color: var(--mexigeo-primary);
             color: white;
             border: none;
         }
@@ -162,7 +156,7 @@
         <div class="form-container" data-aos="fade-up">
             <div class="text-center mb-4">
                 <img src="@cdn/img_snier/login/logo_snier.png" alt="SNIER" class="brand-logo">
-                <h2 class="fw-bold" style="color: var(--primary-color);">Registro de Usuario</h2>
+                <h2 class="fw-bold" style="color: var(--mexigeo-primary);">Registro de Usuario</h2>
                 <p class="text-muted">Completa los siguientes pasos para crear tu cuenta</p>
             </div>
 
