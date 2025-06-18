@@ -17,6 +17,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 Console.WriteLine("Cadena de conexión en Program.cs: " + builder.Configuration.GetConnectionString("DefaultConnection"));
 
+// Bind email configuration so it can be injected via IOptions<EmailSettings>
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
 // Configurar servicios
 builder.Services.AddCors(options =>
 {
