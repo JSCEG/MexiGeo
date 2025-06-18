@@ -527,7 +527,7 @@
 
             <div class="row justify-content-center">
                 <div class="col-lg-5" data-aos="fade-right">
-                    <div class="login-card p-4 p-md-5 mb-4 mb-lg-0">
+                    <div class="login-card p-4 p-md-5 mb-4 mb-lg-0" data-aos="zoom-in">
                         <div class="text-center mb-4">
                             <img src="@cdn/img_snier/login/logo_snier.png" class="img-fluid mb-3"
                                 style="max-width: 120px;">
@@ -806,8 +806,11 @@
 
         // Toggle password visibility
         function togglePassword(event) {
-            if (event && event.type === 'keydown' && !(event.key === 'Enter' || event.key === ' ')) {
-                return;
+            if (event && event.type === 'keydown') {
+                if (!(event.key === 'Enter' || event.key === ' ')) {
+                    return;
+                }
+                event.preventDefault();
             }
 
             const input = document.getElementById("claveInput");
