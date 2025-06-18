@@ -576,7 +576,12 @@
                                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
                                             <input type="password" class="form-control" id="claveInput" name="Clave"
                                                 placeholder="••••••••" required />
-                                            <span class="input-group-text" onclick="togglePassword()">
+                                            <span class="input-group-text"
+                                                role="button"
+                                                tabindex="0"
+                                                aria-label="Mostrar u ocultar contraseña"
+                                                onclick="togglePassword()"
+                                                onkeydown="togglePassword(event)">
                                                 <i class="bi bi-eye" id="iconoClave"></i>
                                             </span>
                                         </div>
@@ -797,7 +802,11 @@
         });
 
         // Toggle password visibility
-        function togglePassword() {
+        function togglePassword(event) {
+            if (event && event.type === 'keydown' && !(event.key === 'Enter' || event.key === ' ')) {
+                return;
+            }
+
             const input = document.getElementById("claveInput");
             const icon = document.getElementById("iconoClave");
             if (input.type === "password") {
