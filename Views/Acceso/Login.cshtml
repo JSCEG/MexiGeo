@@ -527,7 +527,7 @@
 
             <div class="row justify-content-center">
                 <div class="col-lg-5" data-aos="fade-right">
-                    <div class="login-card p-4 p-md-5 mb-4 mb-lg-0">
+                    <div class="login-card p-4 p-md-5 mb-4 mb-lg-0" data-aos="zoom-in">
                         <div class="text-center mb-4">
                             <img src="@cdn/img_snier/login/logo_snier.png" class="img-fluid mb-3"
                                 style="max-width: 120px;">
@@ -579,7 +579,12 @@
                                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
                                             <input type="password" class="form-control" id="claveInput" name="Clave"
                                                 placeholder="••••••••" required />
-                                            <span class="input-group-text" onclick="togglePassword()">
+                                            <span class="input-group-text"
+                                                role="button"
+                                                tabindex="0"
+                                                aria-label="Mostrar u ocultar contraseña"
+                                                onclick="togglePassword()"
+                                                onkeydown="togglePassword(event)">
                                                 <i class="bi bi-eye" id="iconoClave"></i>
                                             </span>
                                         </div>
@@ -800,7 +805,14 @@
         });
 
         // Toggle password visibility
-        function togglePassword() {
+        function togglePassword(event) {
+            if (event && event.type === 'keydown') {
+                if (!(event.key === 'Enter' || event.key === ' ')) {
+                    return;
+                }
+                event.preventDefault();
+            }
+
             const input = document.getElementById("claveInput");
             const icon = document.getElementById("iconoClave");
             if (input.type === "password") {
