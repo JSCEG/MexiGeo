@@ -26,17 +26,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="~/css/mexigeo-theme.css">
 
     <style>
-        :root {
-            --primary-color: #216d92;
-            --primary-light: #81c3c9;
-            --primary-dark: #0d4b6e;
-            --secondary-color: #FF9800;
-            --dark-color: #1A3E4C;
-            --light-color: #F8F9FA;
-            --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-        }
+
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -56,7 +49,7 @@
         }
 
         .hero-section {
-            background: var(--gradient-primary);
+            background: var(--mexigeo-gradient);
             color: white;
             padding: 8rem 0 6rem;
             position: relative;
@@ -81,23 +74,23 @@
         }
 
         .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
+            background-color: var(--mexigeo-primary);
+            border-color: var(--mexigeo-primary);
             padding: 0.75rem 2rem;
             font-weight: 600;
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: var(--primary-dark);
-            border-color: var(--primary-dark);
+            background-color: var(--mexigeo-primary-dark);
+            border-color: var(--mexigeo-primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(33, 109, 146, 0.3);
         }
 
         .btn-secondary {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
+            background-color: var(--mexigeo-secondary);
+            border-color: var(--mexigeo-secondary);
             color: white;
         }
 
@@ -108,7 +101,7 @@
             transition: all 0.3s ease;
             height: 100%;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid var(--primary-light);
+            border-left: 4px solid var(--mexigeo-primary);
         }
 
         .feature-card:hover {
@@ -119,7 +112,7 @@
         .feature-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: var(--primary-color);
+            color: var(--mexigeo-primary);
         }
 
         .section-title {
@@ -135,7 +128,7 @@
             left: 0;
             width: 50px;
             height: 3px;
-            background: var(--primary-color);
+            background: var(--mexigeo-primary);
         }
 
         .testimonial-card {
@@ -151,7 +144,7 @@
             height: 60px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--primary-light);
+            border: 3px solid var(--mexigeo-primary);
         }
 
         .form-section {
@@ -186,7 +179,7 @@
         }
 
         .input-group-text {
-            background-color: var(--primary-color);
+            background-color: var(--mexigeo-primary);
             color: white;
             border: none;
         }
@@ -228,15 +221,15 @@
         }
 
         .nav-pills .nav-link.active {
-            background-color: var(--primary-color);
+            background-color: var(--mexigeo-primary);
         }
 
         .nav-pills .nav-link {
-            color: var(--dark-color);
+            color: var(--mexigeo-text);
         }
 
         footer {
-            background-color: var(--dark-color);
+            background-color: var(--mexigeo-text);
             color: white;
             padding: 4rem 0 2rem;
         }
@@ -266,7 +259,7 @@
         }
 
         .social-icon:hover {
-            background: var(--primary-light);
+            background: var(--mexigeo-primary);
             transform: translateY(-3px);
         }
 
@@ -354,7 +347,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-5" style="background-color: var(--light-color);">
+    <section class="py-5" style="background-color: var(--mexigeo-bg);">
         <div class="container">
             <div class="row g-4">
                 <div class="col-md-3" data-aos="fade-up">
@@ -538,7 +531,7 @@
                         <div class="text-center mb-4">
                             <img src="@cdn/img_snier/login/logo_snier.png" class="img-fluid mb-3"
                                 style="max-width: 120px;">
-                            <h4 class="fw-bold" style="color: var(--primary-color);">Iniciar sesión</h4>
+                            <h4 class="fw-bold" style="color: var(--mexigeo-primary);">Iniciar sesión</h4>
                             <p class="text-muted">Accede con tu cuenta o entra en modo consulta pública</p>
                         </div>
 
@@ -833,7 +826,7 @@
         window.addEventListener('scroll', function () {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
-                navbar.style.backgroundColor = 'var(--primary-dark)';
+                navbar.style.backgroundColor = 'var(--mexigeo-primary-dark)';
                 navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
             } else {
                 navbar.style.backgroundColor = 'rgba(13, 75, 110, 0.9)';

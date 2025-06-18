@@ -20,15 +20,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="~/css/mexigeo-theme.css">
 
     <style>
-        :root {
-            --primary-color: #216d92;
-            --primary-light: #81c3c9;
-            --primary-dark: #0d4b6e;
-            --danger-color: #e74c3c;
-            --warning-color: #f39c12;
-        }
+
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -67,8 +62,8 @@
         }
 
         .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
+            background-color: var(--mexigeo-primary);
+            border-color: var(--mexigeo-primary);
             font-weight: 600;
             padding: 0.75rem 1.5rem;
             transition: all 0.3s ease;
@@ -76,30 +71,30 @@
         }
 
         .btn-primary:hover {
-            background-color: var(--primary-dark);
-            border-color: var(--primary-dark);
+            background-color: var(--mexigeo-primary-dark);
+            border-color: var(--mexigeo-primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(33, 109, 146, 0.3);
         }
 
         .alert-danger {
             background-color: rgba(231, 76, 60, 0.15);
-            color: var(--danger-color);
+            color: var(--mexigeo-accent-red);
             border: none;
-            border-left: 4px solid var(--danger-color);
+            border-left: 4px solid var(--mexigeo-accent-red);
         }
 
         .alert-warning {
             background-color: rgba(243, 156, 18, 0.15);
-            color: var(--warning-color);
+            color: var(--mexigeo-accent-purple);
             border: none;
-            border-left: 4px solid var(--warning-color);
+            border-left: 4px solid var(--mexigeo-accent-purple);
         }
 
         .countdown {
             font-weight: 700;
             font-size: 1.1rem;
-            color: var(--primary-color);
+            color: var(--mexigeo-primary);
         }
 
         .text-muted {
@@ -139,7 +134,7 @@
                 <img src="@cdn/img_snier/login/logo_snier.png" alt="SNIER" class="brand-logo">
             </div>
 
-            <h4 class="fw-bold mb-4" style="color: var(--primary-color);">Sesión Expirada</h4>
+            <h4 class="fw-bold mb-4" style="color: var(--mexigeo-primary);">Sesión Expirada</h4>
 
             <div class="alert alert-danger mb-4">
                 <div class="d-flex align-items-center">

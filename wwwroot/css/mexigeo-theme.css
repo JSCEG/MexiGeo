@@ -1,0 +1,12 @@
+:root {
+    --mexigeo-primary: #F88C6B;
+    --mexigeo-primary-dark: #e67555;
+    --mexigeo-secondary: #FFFFFF;
+    --mexigeo-text: #2B2B2B;
+    --mexigeo-accent-red: #F2484B;
+    --mexigeo-accent-green: #4CAF50;
+    --mexigeo-accent-purple: #9C27B0;
+    --mexigeo-accent-blue: #2196F3;
+    --mexigeo-bg: #F4F4F4;
+    --mexigeo-gradient: linear-gradient(135deg, var(--mexigeo-primary) 0%, var(--mexigeo-primary-dark) 100%);
+}
