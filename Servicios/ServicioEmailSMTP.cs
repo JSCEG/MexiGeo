@@ -2,7 +2,8 @@
 using System;
 using System.Net;
 using System.Net.Mail;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using MEXIGEO.Models;
 
 namespace MEXIGEO.Servicios
 {
@@ -12,51 +13,22 @@ namespace MEXIGEO.Servicios
         Task EnviarCorreo(string destinatario, string asunto, string cuerpo);
     }
 
-    // public class ServicioEmailSmtp : IServicioEmailSMTP
-    // {
-    //     private readonly IConfiguration _configuration;
-
-    //     public ServicioEmailSmtp(IConfiguration configuration)
-    //     {
-    //         _configuration = configuration;
-    //     }
-
-    //     public async Task EnviarCorreo(string destinatario, string asunto, string cuerpo)
-    //     {
-    //         var client = new SmtpClient("smtp.office365.com", 587)
-    //         {
-    //             Credentials = new NetworkCredential(_configuration["EmailSettings:Username"], _configuration["EmailSettings:Password"]),
-    //             EnableSsl = true
-    //         };
-
-    //         var mailMessage = new MailMessage
-    //         {
-    //             From = new MailAddress(_configuration["EmailSettings:Username"]),
-    //             Subject = asunto,
-    //             Body = cuerpo,
-    //             IsBodyHtml = true,
-    //         };
-    //         mailMessage.To.Add(destinatario);
-
-    //         await client.SendMailAsync(mailMessage);
-    //     }
-    // }
     public class ServicioEmailSmtp : IServicioEmailSMTP
     {
-        private readonly IConfiguration _configuration;
+        private readonly EmailSettings _settings;
 
-        public ServicioEmailSmtp(IConfiguration configuration)
+        public ServicioEmailSmtp(IOptions<EmailSettings> options)
         {
-            _configuration = configuration;
+            _settings = options.Value;
         }
 
         public async Task EnviarCorreo(string destinatario, string asunto, string cuerpo)
         {
             try
             {
-                string tipoCuenta = _configuration["EmailSettings:TipoCuenta"];
-                string username = _configuration["EmailSettings:Username"];
-                string password = _configuration["EmailSettings:Password"];
+                string tipoCuenta = _settings.TipoCuenta;
+                string username = _settings.Username;
+                string password = _settings.Password;
 
                 string host;
                 int port;
@@ -64,21 +36,21 @@ namespace MEXIGEO.Servicios
 
                 if (tipoCuenta == "Office365")            // Tenants empresariales
                 {
-                    host = _configuration["EmailSettings:SmtpOffice365:Host"];
-                    port = int.Parse(_configuration["EmailSettings:SmtpOffice365:Port"]);
-                    enableSsl = bool.Parse(_configuration["EmailSettings:SmtpOffice365:EnableSsl"]);
+                    host = _settings.SmtpOffice365.Host;
+                    port = _settings.SmtpOffice365.Port;
+                    enableSsl = _settings.SmtpOffice365.EnableSsl;
                 }
                 else if (tipoCuenta == "Exchange")        // Servidor on-prem interno
                 {
-                    host = _configuration["EmailSettings:SmtpExchange:Host"];
-                    port = int.Parse(_configuration["EmailSettings:SmtpExchange:Port"]);
-                    enableSsl = bool.Parse(_configuration["EmailSettings:SmtpExchange:EnableSsl"]);
+                    host = _settings.SmtpExchange.Host;
+                    port = _settings.SmtpExchange.Port;
+                    enableSsl = _settings.SmtpExchange.EnableSsl;
                 }
                 else if (tipoCuenta == "OutlookBasic")    // NUEVO: cuentas @outlook.com / @hotmail
                 {
-                    host = _configuration["EmailSettings:SmtpOutlook:Host"];
-                    port = int.Parse(_configuration["EmailSettings:SmtpOutlook:Port"]);
-                    enableSsl = bool.Parse(_configuration["EmailSettings:SmtpOutlook:EnableSsl"]);
+                    host = _settings.SmtpOutlook.Host;
+                    port = _settings.SmtpOutlook.Port;
+                    enableSsl = _settings.SmtpOutlook.EnableSsl;
                 }
                 else
                 {
@@ -88,7 +60,9 @@ namespace MEXIGEO.Servicios
                 using var client = new SmtpClient(host, port)
                 {
                     Credentials = new NetworkCredential(username, password),
-                    EnableSsl = enableSsl
+                    EnableSsl = enableSsl,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false
                 };
 
                 var mailMessage = new MailMessage
